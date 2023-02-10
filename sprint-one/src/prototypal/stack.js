@@ -29,8 +29,4 @@ stackMethods.size = function() {
   return Object.keys(this.storage).length;
 }
 
-// Initialize Prototype
-for (method in stackMethods) {
-  //Stack.prototype[method] = stackMethods[method];
-}
 

@@ -10,11 +10,14 @@ var Stack = function() {
   };
 
   someInstance.pop = function() {
-    let size = someInstance.size();
-    if (size > 0) {
-        let result = storage[(size - 1).toString()];
-        delete storage[(size - 1).toString()];
-        return result;
+    let dataSize = someInstance.size();
+
+    if (dataSize > 0) {
+
+        let poppedElement = storage[(dataSize - 1).toString()];
+        delete storage[(dataSize - 1).toString()];
+
+        return poppedElement;
     }
   };
 

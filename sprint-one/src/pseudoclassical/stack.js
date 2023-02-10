@@ -5,8 +5,6 @@ var Stack = function() {
 };
 
 // All Car Methods
-//Stack.prototype = {};
-
 Stack.prototype.push = function(value) {
   this.storage[this.size()] = value;
 }
