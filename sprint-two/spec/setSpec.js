@@ -24,4 +24,30 @@ describe('set', function() {
     expect(set.contains('Mel Gibson')).to.equal(false);
   });
 
+  // New Test
+  it('added items should be unique and deleting should only take one operation', function() {
+    set.add('Mel Gibson');
+    set.add('Mel Gibson');
+    set.add('Mel Gibson');
+    set.add('Mel Gibson');
+    expect(set.contains('Mel Gibson')).to.equal(true);
+    set.remove('Mel Gibson');
+    expect(set.contains('Mel Gibson')).to.equal(false);
+  });
+
+  it('should add values to a set and handle numbers/strings together', function() {
+    set.add(2);
+    set.add('Danny Glover');
+    expect(set.contains('Danny Glover')).to.equal(true);
+    expect(set.contains(2)).to.equal(true);
+  });
+
+  it('should remove values from a set and handle numbers/strings together', function() {
+    set.add('Mel Gibson');
+    set.remove('Mel Gibson');
+    expect(set.contains('Mel Gibson')).to.equal(false);
+    set.add(214);
+    set.remove(214);
+    expect(set.contains(214)).to.equal(false);
+  });
 });

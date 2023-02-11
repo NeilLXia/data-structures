@@ -73,4 +73,23 @@ describe('hashTable', function() {
     hashTable.remove('Mr.');
     expect(hashTable._limit).to.equal(8);
   });
+
+  // New Test
+  it ('should continue to halve in size when needed', function() {
+    _.each(people, function(person) {
+      var firstName = person[0];
+      var lastName = person[1];
+      hashTable.insert(firstName, lastName);
+      expect(hashTable.retrieve(firstName)).to.equal(lastName);
+    });
+    expect(hashTable._limit).to.equal(16);
+    hashTable.remove('George');
+    hashTable.remove('Dr.');
+    hashTable.remove('Steven');
+    hashTable.remove('John');
+    hashTable.remove('Mr.');
+    hashTable.remove('Brendan');
+    hashTable.remove('Alan.');
+    expect(hashTable._limit).to.equal(4);
+  });
 });

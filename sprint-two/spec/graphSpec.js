@@ -68,4 +68,15 @@ describe('graph', function() {
     expect(graph.hasEdge(3, 5)).to.equal(true);
     expect(graph.hasEdge(5, 5)).to.equal(true);
   });
+
+  // New Test
+  it('a node that is removed and readded should not have any edges with the other nodes', function() {
+    graph.addNode(4);
+    graph.addNode(5);
+    graph.addEdge(5, 4);
+    graph.removeNode(5);
+    graph.addNode(5);
+    expect(graph.hasEdge(4, 5)).to.equal(false);
+    expect(graph.hasEdge(5, 4)).to.equal(false);
+  });
 });

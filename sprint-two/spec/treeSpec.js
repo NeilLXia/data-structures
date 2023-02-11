@@ -41,4 +41,46 @@ describe('tree', function() {
     expect(tree.contains(8)).to.equal(true);
   });
 
+  // New Tests
+  it('should detect values correctly in additional layers of nested children', function() {
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.children[0].addChild(7);
+    tree.children[1].addChild(8);
+    tree.children[1].children[0].addChild(1);
+    tree.children[1].children[0].children[0].addChild(2);
+    expect(tree.contains(2)).to.equal(true);
+    expect(tree.contains(9)).to.equal(false);
+  });
+
+  it('adding children should also have their parent property reference correctly', function() {
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.addChild(7);
+    expect(tree.children[0].parent).to.equal(tree);
+    expect(tree.children[1].parent).to.equal(tree);
+    expect(tree.children[2].parent).to.equal(tree);
+    tree.children[0].addChild(8);
+    tree.children[1].addChild(9);
+    expect(tree.children[0].children[0].parent).to.equal(tree.children[0]);
+    expect(tree.children[1].children[0].parent).to.equal(tree.children[1]);
+  });
+
+  it('should execute a callback on each node in the tree', function() {
+    var allZeroTree = function(item) {
+      item.value = 0;
+    };
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.addChild(7);
+    tree.children[0].addChild(8);
+    tree.children[1].addChild(9);
+    tree.traverse(allZeroTree);
+    expect(tree.value).to.equal(0);
+    expect(tree.children[0].value).to.equal(0);
+    expect(tree.children[1].value).to.equal(0);
+    expect(tree.children[2].value).to.equal(0);
+    expect(tree.children[0].children[0].value).to.equal(0);
+    expect(tree.children[1].children[0].value).to.equal(0);
+  });
 });

@@ -52,4 +52,14 @@ describe('linkedList', function() {
   });
 
   // add more tests here to test the functionality of linkedList
+  it('should remain functional after all items are removed and items are added back in', function() {
+    linkedList.addToTail(4);
+    linkedList.removeHead();
+    linkedList.removeHead();
+    expect(linkedList.contains(4)).to.equal(false);
+    linkedList.addToTail(4);
+    linkedList.addToTail(5);
+    expect(linkedList.contains(4)).to.equal(true);
+    expect(linkedList.contains(5)).to.equal(true);
+  });
 });

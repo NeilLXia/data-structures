@@ -30,11 +30,42 @@ describe('binarySearchTree', function() {
 
   it('should execute a callback on every value in a tree using "depthFirstLog"', function() {
     var array = [];
-    var func = function(value) { array.push(value); };
+    var func = function(node) { array.push(node.value); };
     binarySearchTree.insert(2);
     binarySearchTree.insert(3);
     binarySearchTree.insert(7);
     binarySearchTree.depthFirstLog(func);
     expect(array).to.eql([5, 2, 3, 7]);
+  });
+
+  // New Test
+  it('should execute a callback on every value in a tree using "breadthFirstLog"', function() {
+    var array = [];
+    var func = function(node) { array.push(node.value); };
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(1);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(6);
+    binarySearchTree.insert(10);
+    binarySearchTree.breadthFirstLog(func);
+    expect(array).to.eql([5, 2, 7, 1, 3, 6, 10]);
+  });
+
+  it('should rebalance entire tree on command', function() {
+
+    binarySearchTree.insert(1);
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(8);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(6);
+
+    binarySearchTree = binarySearchTree.rebalance();
+
+    var array = [];
+    var func = function(node) { array.push(node.value); };
+    binarySearchTree.breadthFirstLog(func);
+    expect(array).to.eql([5, 2, 7, 1, 3, 6, 8]);
   });
 });
